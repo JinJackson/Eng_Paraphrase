@@ -1,11 +1,10 @@
 CUDA_VISIBLE_DEVICES=0 python3 run.py --do_train \
---get_badcase   \
 --model_type "bert" \
---bert_model  "../ckpts/bert-base-uncased/" \
+--bert_model  "bert-base-uncased" \
 --train_file "./data/quora/train" \
 --dev_file "./data/quora/dev" \
 --test_file "./data/quora/test" \
---name 'bert-grdrop'   \
+--name 'baseline'   \
 --data 'quora'   \
 --do_lower_case \
 --learning_rate 2e-5 \
