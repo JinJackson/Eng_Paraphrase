@@ -12,7 +12,6 @@ CUDA_VISIBLE_DEVICES=0 python3 run.py --do_train \
 --batch_size 64 \
 --max_length 65 \
 --fp16 --fptype O2 \
---alpha 0.1 \
 --save_dir "./save/"
 
 # nohup sh train.sh > ./logs/1.txt 2>&1 &
