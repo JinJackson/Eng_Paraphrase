@@ -128,8 +128,8 @@ def train(model, tokenizer, checkpoint, out_path):
     max_acc = 0.0
     cur_batch = 0
 
-    if args.fgm or args.grdrop or args.grdrop_logits:
-      fgm = FGM(model)
+    # if args.fgm or args.grdrop or args.grdrop_logits:
+    #   fgm = FGM(model)
     # t = torch.nn.Parameter(torch.FloatTensor(1)).to(args.device)
     for epoch in range(checkpoint, args.epochs):
         model.train()
