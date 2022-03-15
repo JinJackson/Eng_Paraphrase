@@ -1,4 +1,4 @@
-CUDA_VISIBLE_DEVICES=0 python3 run.py --do_train \
+CUDA_VISIBLE_DEVICES=$1 python3 run.py --do_train \
 --model_type "bert" \
 --bert_model  "bert-base-uncased" \
 --train_file "./data/quora/train" \
