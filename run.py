@@ -135,7 +135,7 @@ def train(model, tokenizer, checkpoint, out_path):
         model.train()
         epoch_loss = []
         
-        for batch in tqdm(train_dataLoader, desc="Iteration"):
+        for batch in tqdm(train_dataLoader, desc="Iteration", ncols=50):
             cur_batch += 1
             model.zero_grad()
             # 设置tensor gpu运行
@@ -271,7 +271,7 @@ def evaluate(model, tokenizer, eval_file, checkpoint, output_dir=None):
 
     softmax = torch.nn.Softmax(dim=1)
 
-    for batch in eval_dataLoader: 
+    for batch in tqdm(eval_dataLoader, desc='test', ncols=50): 
         batch = tuple(t.to(args.device) for t in batch)
         input_ids, token_type_ids, attention_mask, labels = batch
 
