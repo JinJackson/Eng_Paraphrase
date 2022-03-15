@@ -281,7 +281,8 @@ def evaluate(model, tokenizer, eval_file, checkpoint, output_dir=None):
             outputs = model(input_ids=input_ids,
                             token_type_ids=None if args.model_type == 'roberta' else token_type_ids,
                             attention_mask=attention_mask,
-                            labels=labels)
+                            labels=labels,
+                            return_dict=True)
 
             eval_loss, logits = outputs['loss'], outputs['logits']
             loss.append(eval_loss.item())
