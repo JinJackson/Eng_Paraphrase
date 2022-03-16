@@ -224,26 +224,26 @@ def train(model, tokenizer, checkpoint, out_path):
                     }, step=cur_batch,
                   )
                 
-                # 删除历史模型
-                filelist = os.listdir(out_path)
-                for f in filelist:
-                  filepath = os.path.join(out_path, f)
-                  if os.path.isdir(filepath):
-                    shutil.rmtree(filepath,True)
+                # # 删除历史模型
+                # filelist = os.listdir(out_path)
+                # for f in filelist:
+                #   filepath = os.path.join(out_path, f)
+                #   if os.path.isdir(filepath):
+                #     shutil.rmtree(filepath,True)
 
                 # 保存模型
-                # if not os.path.exists(output_dir):
-                #     os.makedirs(output_dir)
-                # model_to_save = (model.module if hasattr(model, "module") else model)
-                # model_to_save.save_pretrained(output_dir)
-                # tokenizer.save_pretrained(output_dir)
-                # torch.save(args, os.path.join(output_dir, "training_args.bin"))
-                # logger.debug("Saving model checkpoint to %s", output_dir)
-                # if args.fp16:
-                #   torch.save(amp.state_dict(), os.path.join(output_dir, "amp.pt"))
-                # torch.save(optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"))
-                # torch.save(scheduler.state_dict(), os.path.join(output_dir, "scheduler.pt"))
-                # logger.debug("Saving optimizer and scheduler states to %s", output_dir)
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
+                model_to_save = (model.module if hasattr(model, "module") else model)
+                model_to_save.save_pretrained(output_dir)
+                tokenizer.save_pretrained(output_dir)
+                torch.save(args, os.path.join(output_dir, "training_args.bin"))
+                logger.debug("Saving model checkpoint to %s", output_dir)
+                if args.fp16:
+                  torch.save(amp.state_dict(), os.path.join(output_dir, "amp.pt"))
+                torch.save(optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"))
+                torch.save(scheduler.state_dict(), os.path.join(output_dir, "scheduler.pt"))
+                logger.debug("Saving optimizer and scheduler states to %s", output_dir)
     logger.info('Training Finished')
 
               
