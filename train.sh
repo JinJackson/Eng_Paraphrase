@@ -3,6 +3,7 @@ dataset='mrpc'
 learning_rate='2e-5'
 epochs=4
 batch_size=64
+save_step=100
 CUDA_VISIBLE_DEVICES=$1 python run.py --do_train \
 --model_type "bert" \
 --bert_model  "bert-base-uncased" \
@@ -12,6 +13,7 @@ CUDA_VISIBLE_DEVICES=$1 python run.py --do_train \
 --name $name   \
 --data 'quora'   \
 --do_lower_case \
+--save_step $save_step \
 --learning_rate $learning_rate \
 --epochs $epochs \
 --batch_size $batch_size \
