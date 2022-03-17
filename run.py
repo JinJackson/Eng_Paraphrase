@@ -200,7 +200,7 @@ def train(model, tokenizer, checkpoint, out_path):
               output_dir = out_path + "/checkpoint-" + str(epoch) + '-' + str(cur_batch)
               # eval dev
               eval_loss, eval_acc = evaluate(model, tokenizer, eval_file=args.dev_file, checkpoint=epoch)
-              logger.debug('【DEV】Train Epoch %d: train_loss=%.4f, acc=%.4f' % (epoch, np.array(epoch_loss).mean(), eval_acc))
+              logger.debug('【DEV】Train Epoch %d, step %d: train_loss=%.4f, acc=%.4f' % (epoch, cur_batch, np.array(epoch_loss).mean(), eval_acc))
               # logger.info('***************t=%.4f*****************' % (t))
               wandb.log(
                     {
@@ -208,21 +208,21 @@ def train(model, tokenizer, checkpoint, out_path):
                         "valid acc": eval_acc,
                     }, step=cur_batch,
               )
-              if max_acc < eval_acc:
+              if max_acc <= eval_acc:
                 max_acc = eval_acc
                 wandb.run.summary["best val acc"] = max_acc
                 # 输出日志 + 保存日志
-                logger.info('【DEV】Train Epoch %d: train_loss=%.4f, acc=%.4f' % (epoch, np.array(epoch_loss).mean(), eval_acc))
+                logger.info('【DEV】Train Epoch %d, step %d: train_loss=%.4f, acc=%.4f' % (epoch, cur_batch, np.array(epoch_loss).mean(), eval_acc))
                 
                 # eval test
-                if args.test_file:
-                  test_eval_loss, test_acc = evaluate(model, tokenizer, eval_file=args.test_file, checkpoint=epoch)
-                  logger.info('【TEST】Train Epoch %d: train_loss=%.4f, acc=%.4f' % (epoch, np.array(epoch_loss).mean(), test_acc))
-                  wandb.log(
-                    {
-                        "test acc": test_acc,
-                    }, step=cur_batch,
-                  )
+              if args.test_file:
+                test_eval_loss, test_acc = evaluate(model, tokenizer, eval_file=args.test_file, checkpoint=epoch)
+                logger.info('【TEST】Train Epoch %d, step %d: train_loss=%.4f, acc=%.4f' % (epoch, cur_batch, np.array(epoch_loss).mean(), test_acc))
+                wandb.log(
+                  {
+                      "test acc": test_acc,
+                  }, step=cur_batch,
+                )
                 
                 # # 删除历史模型
                 # filelist = os.listdir(out_path)
