@@ -43,6 +43,8 @@ parser.add_argument("--warmup_steps", default=0, type=int)
 
 parser.add_argument('--fp16', action='store_true')
 parser.add_argument('--fptype', default="O1")
+
+# test args
 args = parser.parse_args()
 
 device = torch.device("cuda:" + str(args.gpu) if torch.cuda.is_available() else "cpu")

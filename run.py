@@ -1,5 +1,5 @@
 #coding=utf-8
-from parser import args
+from parser1 import args
 from torch.utils.data import Dataset, DataLoader
 from transformers import BertTokenizer, BertForSequenceClassification
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
@@ -139,7 +139,7 @@ def train(model, tokenizer, checkpoint, out_path):
             cur_batch += 1
             model.zero_grad()
             # 设置tensor gpu运行
-            batch = tuple(t.to(args.device) for t in batch)
+            batch = tuple(t.to(args.device) for t in batch[:-2])
             input_ids, token_type_ids, attention_mask, labels = batch
 
             outputs = model(input_ids=input_ids,
@@ -272,7 +272,7 @@ def evaluate(model, tokenizer, eval_file, checkpoint, output_dir=None):
     softmax = torch.nn.Softmax(dim=1)
 
     for batch in tqdm(eval_dataLoader, desc='test', ncols=50): 
-        batch = tuple(t.to(args.device) for t in batch)
+        batch = tuple(t.to(args.device) for t in batch[:-2])
         input_ids, token_type_ids, attention_mask, labels = batch
 
 

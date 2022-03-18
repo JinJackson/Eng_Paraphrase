@@ -1,6 +1,6 @@
 from torch.utils.data import Dataset, DataLoader
 import torch
-from parser import args
+from parser1 import args
 import codecs, json
 import numpy as np
 
@@ -44,7 +44,7 @@ class TrainDataBert(Dataset):
                                        padding='max_length',
                                        truncation=True)
 
-        return np.array(tokenized_dic['input_ids']), np.array(tokenized_dic['token_type_ids'] if 'token_type_ids' in tokenized_dic else []), np.array(tokenized_dic['attention_mask']), np.array([data[2]])
+        return np.array(tokenized_dic['input_ids']), np.array(tokenized_dic['token_type_ids'] if 'token_type_ids' in tokenized_dic else []), np.array(tokenized_dic['attention_mask']), np.array([data[2]]), query, answer
 
     def __len__(self):
         # You should change 0 to the total size of your dataset.
