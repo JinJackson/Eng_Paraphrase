@@ -196,7 +196,7 @@ def train(model, tokenizer, checkpoint, out_path):
             optimizer.step()
             scheduler.step()   
            
-            if cur_batch % args.save_step == 0 and epoch > 0:
+            if cur_batch % args.save_step == 0:
               output_dir = out_path + "/checkpoint-" + str(epoch) + '-' + str(cur_batch)
               # eval dev
               eval_loss, eval_acc = evaluate(model, tokenizer, eval_file=args.dev_file, checkpoint=epoch)
