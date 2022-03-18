@@ -87,7 +87,7 @@ class EvalDataBert(Dataset):
                                        padding='max_length',
                                        truncation=True)
 
-        return np.array(tokenized_dic['input_ids']), np.array(tokenized_dic['token_type_ids'] if 'token_type_ids' in tokenized_dic else []), np.array(tokenized_dic['attention_mask']), np.array([data[2]]), query， answer
+        return np.array(tokenized_dic['input_ids']), np.array(tokenized_dic['token_type_ids'] if 'token_type_ids' in tokenized_dic else []), np.array(tokenized_dic['attention_mask']), np.array([data[2]]), query, answer
 
     
     def __len__(self):
