@@ -30,9 +30,9 @@ def _to_list(x):
 def get_args():
     parser_test = argparse.ArgumentParser()
 
-    parser_test.add_argument('--test_file', default='mrpc', type=str)
+    parser_test.add_argument('--test_file', default='quora', type=str)
     # parser_test.add_argument('--model_type', default='vae', type=str, required=True) #vae baseline multi-task
-    parser_test.add_argument('--save_dir', default=r'save/mrpc/baseline_1_500', type=str) # test_model dir
+    parser_test.add_argument('--save_dir', default=r'save/quora/baseline_1_11000', type=str) # test_model dir
     # parser_test.add_argument('--save_dir', default=r'save/mrpc/ck_4_1100', type=str)
     parser_test.add_argument('--max_length', default=128, type=int)
     parser_test.add_argument('--batch_size', default=64, type=int)
@@ -47,11 +47,11 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 localtime = time.localtime(time.time())#获取当前时间
 time = time.strftime('%Y%m%d',time.localtime(time.time()))#把获取的时间转换成"年月日格式”
 
-output_dir = r'./save/mrpc/test_save/' + time + args_test.save_dir.split('/')[-1]
+output_dir = r'./save/' + args_test.test_file + '/test_save/' + time + args_test.save_dir.split('/')[-1]
 if not os.path.exists(output_dir):
   os.makedirs(output_dir)
 
-test_file = './data/' + args_test.test_file + '/test'
+test_file = './data/' + args_test.test_file + '/dev'
 
 def get_wrong_case(all_labels):
     wrong_case = []
