@@ -32,7 +32,7 @@ def get_args():
 
     parser_test.add_argument('--test_file', default='quora', type=str)
     # parser_test.add_argument('--model_type', default='vae', type=str, required=True) #vae baseline multi-task
-    parser_test.add_argument('--save_dir', default=r'save/quora/baseline_1_11000', type=str) # test_model dir
+    parser_test.add_argument('--save_dir', default=r'save/quora/baseline_1_10000', type=str) # test_model dir
     # parser_test.add_argument('--save_dir', default=r'save/mrpc/ck_4_1100', type=str)
     parser_test.add_argument('--max_length', default=128, type=int)
     parser_test.add_argument('--batch_size', default=64, type=int)
